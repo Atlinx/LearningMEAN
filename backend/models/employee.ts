@@ -25,4 +25,4 @@ const employeeSchema = new Schema<Employee>({
    collection: 'employees'
 });
 
-export const EmployeeSchema = model('Employee', employeeSchema);
+export const EmployeeModel = model('Employee', employeeSchema);

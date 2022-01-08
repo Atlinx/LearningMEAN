@@ -4,11 +4,11 @@ const app = express();
 const employeeRoute = express.Router();
 
 // Employee model
-import { EmployeeSchema, Employee } from '../models/Employee';
+import { EmployeeModel, Employee } from '../models/Employee';
 
 // Add Employee
 employeeRoute.route('/create').post((req, res, next) => {
-  EmployeeSchema.create(req.body, (error: NativeError, data: Employee) => {
+  EmployeeModel.create(req.body, (error: NativeError, data: Employee) => {
     if (error) {
       return next(error)
     } else {
@@ -19,7 +19,7 @@ employeeRoute.route('/create').post((req, res, next) => {
 
 // Get All Employees
 employeeRoute.route('/').get((req, res, next) => {
-  EmployeeSchema.find((error: NativeError, data: Employee) => {
+  EmployeeModel.find((error: NativeError, data: Employee) => {
     if (error) {
       return next(error)
     } else {
@@ -30,7 +30,7 @@ employeeRoute.route('/').get((req, res, next) => {
 
 // Get single employee
 employeeRoute.route('/read/:id').get((req, res, next) => {
-  EmployeeSchema.findById(req.params.id, (error: NativeError, data: Employee) => {
+  EmployeeModel.findById(req.params.id, (error: NativeError, data: Employee) => {
     if (error) {
       return next(error)
     } else {
@@ -42,7 +42,7 @@ employeeRoute.route('/read/:id').get((req, res, next) => {
 
 // Update employee
 employeeRoute.route('/update/:id').put((req, res, next) => {
-  EmployeeSchema.findByIdAndUpdate(req.params.id, {
+  EmployeeModel.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, (error: NativeError, data: Employee) => {
     if (error) {
@@ -59,7 +59,7 @@ employeeRoute.route('/update/:id').put((req, res, next) => {
 employeeRoute.route('/delete/:id').delete((req, res, next) => {
   // Equivalanet to:
   // findOneAndDelete({ _id: req.params.id }, ...)
-  EmployeeSchema.findByIdAndDelete(req.params.id, (error: NativeError, data: Employee) => {
+  EmployeeModel.findByIdAndDelete(req.params.id, (error: NativeError, data: Employee) => {
     if (error) {
       return next(error);
     } else {
